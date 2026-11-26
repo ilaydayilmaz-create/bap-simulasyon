@@ -1,0 +1,60 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>BAP Ek Puan Simülasyonu – Görsel Özet</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1c2333;--mu:#667085;--bd:#e3e6ee;--b:#2f5597;--o:#ed7d31;--g:#2e9e5b;--r:#c0392b;--ac:#1f3864;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12151c;--card:#1b2030;--tx:#e8ebf3;--mu:#9aa3b8;--bd:#2c3348;--b:#6f95e0;--o:#f29a5c;--g:#4fc283;--r:#ef6b5b;--ac:#9db7f0}}
+:root[data-theme="dark"]{--bg:#12151c;--card:#1b2030;--tx:#e8ebf3;--mu:#9aa3b8;--bd:#2c3348;--b:#6f95e0;--o:#f29a5c;--g:#4fc283;--r:#ef6b5b;--ac:#9db7f0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 Calibri,"Segoe UI",Arial,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:17px;margin:0 0 4px}p.s{color:var(--mu);margin:0 0 16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:16px}
+.ctl{display:flex;flex-wrap:wrap;gap:16px;align-items:center}.ctl input[type=range]{flex:1;min-width:200px;accent-color:var(--b)}
+.big{font-size:22px;font-weight:700;color:var(--ac)}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.kp .card{margin:0}.kp .v{font-size:30px;font-weight:700}.kp .l{color:var(--mu);font-size:13px}
+.seg{display:inline-flex;border:1px solid var(--bd);border-radius:8px;overflow:hidden}.seg button{background:none;border:0;padding:6px 14px;color:var(--tx);font:inherit;cursor:pointer}.seg button.on{background:var(--b);color:#fff}
+.sc{overflow-x:auto}svg{display:block;max-width:100%}svg text{fill:var(--tx);font-size:11px}svg .mu{fill:var(--mu)}
+.lg{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--mu);margin-top:6px}.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:7px 9px;border-bottom:1px solid var(--bd);text-align:left}th{color:var(--mu);font-weight:600;font-size:12px}td.n{text-align:center}
+.bd{display:inline-block;padding:1px 9px;border-radius:99px;font-size:12px;font-weight:600}.K{background:rgba(46,158,91,.18);color:var(--g)}.R{background:rgba(192,57,43,.15);color:var(--r)}.ch{outline:2px solid var(--o)}
+.pos{color:var(--g)}.neg{color:var(--r)}
+</style></head><body><main>
+<h1>BAP 2026 – Ek puan simülasyonu</h1>
+<p class="s">Önceki ve yeni ek puan kriterlerinin 20 değerlendirilen proje üzerindeki etkisi. Eşiği kaydırarak sonuçların nasıl değiştiğini görün.</p>
+<div class="card"><div class="ctl"><b>Kabul eşiği (hakem + ek puan ≥)</b><input id="t" type="range" min="20" max="42" value="28"><span class="big" id="tv">28</span></div></div>
+<div class="kp" id="kp"></div>
+<div class="card"><div class="ctl"><h2 style="margin:0;flex:1">Projelere göre puan</h2><div class="seg" id="seg"><button data-k="o">Önceki kriterler</button><button data-k="n" class="on">Yeni kriterler</button></div></div>
+<p class="s">Mavi: hakem puanı · turuncu: ek puan · kesikli çizgi: eşik.</p><div class="sc" id="c1"></div></div>
+<div class="card"><h2>İki kriter yan yana</h2><p class="s">Her satırda önceki (içi boş daire) ve yeni (dolu daire) toplam puan; dikey çizgi eşiktir.</p><div class="sc" id="c2"></div>
+<div class="lg"><span><i style="background:var(--o)"></i>Önceki kriterler</span><span><i style="background:var(--b)"></i>Yeni kriterler</span></div></div>
+<div class="card"><h2>Kriterler</h2><div class="sc"><table id="ct"></table></div></div>
+<div class="card"><h2>Proje bazında sonuç</h2><p class="s">Turuncu çerçeve: iki kriter arasında sonucu değişen proje.</p><div class="sc"><table id="pt"></table></div></div>
+</main><script>
+const D={"p": [{"id": "2026.01.022", "n": "Neşenur Altıniğne Ekici", "h": 36, "cur": "Kabul", "oe": -1, "ot": 35, "ne": -1, "nt": 35, "b": 199933.33}, {"id": "2026.01.008", "n": "Şebnem Özatik", "h": 36, "cur": "Kabul", "oe": 6, "ot": 42, "ne": 6, "nt": 42, "b": 200000}, {"id": "2026.01.020", "n": "Okan Zafer Batur", "h": 34, "cur": "Kabul", "oe": 7, "ot": 41, "ne": 6, "nt": 40, "b": 198500}, {"id": "2026.01.007", "n": "Selçuk Özaydın", "h": 34, "cur": "Kabul", "oe": 7, "ot": 41, "ne": 6, "nt": 40, "b": 89416.24}, {"id": "2026.01.013", "n": "Yiğit Özatalay", "h": 32, "cur": "Kabul", "oe": 7, "ot": 39, "ne": 6, "nt": 38, "b": 154177}, {"id": "2026.01.011", "n": "Gürkan Günay", "h": 32, "cur": "Kabul", "oe": 7, "ot": 39, "ne": 6, "nt": 38, "b": 187022}, {"id": "2026.01.009", "n": "Candan Eker", "h": 32, "cur": "Kabul", "oe": 6, "ot": 38, "ne": 6, "nt": 38, "b": 200000}, {"id": "2026.01.016", "n": "Türkan Benan Orbay", "h": 31, "cur": "Kabul", "oe": 0, "ot": 31, "ne": 0, "nt": 31, "b": 200000}, {"id": "2026.01.019", "n": "Ece Şener", "h": 30, "cur": "Kabul", "oe": 7, "ot": 37, "ne": 6, "nt": 36, "b": 180460}, {"id": "2026.01.017", "n": "Deniz Tahiroglu", "h": 30, "cur": "Kabul", "oe": 4, "ot": 34, "ne": 3, "nt": 33, "b": 199054}, {"id": "2026.01.006", "n": "Duygu Uygur", "h": 29, "cur": "Kabul", "oe": 4, "ot": 33, "ne": 3, "nt": 32, "b": 32184}, {"id": "2026.01.001", "n": "Eren Tosyalı", "h": 29, "cur": "Kabul", "oe": 7, "ot": 36, "ne": 6, "nt": 35, "b": 78969.47}, {"id": "2026.01.023", "n": "Umman Mahir Yıldırım", "h": 28, "cur": "Kabul", "oe": 7, "ot": 35, "ne": 6, "nt": 34, "b": 118008}, {"id": "2026.01.024", "n": "Baykal Sarıoğlu", "h": 27, "cur": "Ret", "oe": 4, "ot": 31, "ne": 0, "nt": 27, "b": 160920}, {"id": "2026.01.021", "n": "Aysa Jafari Farmand", "h": 27, "cur": "Ret", "oe": 3, "ot": 30, "ne": 3, "nt": 30, "b": 189999}, {"id": "2026.01.018", "n": "Yiğit Kürüm", "h": 27, "cur": "Ret", "oe": 6, "ot": 33, "ne": 6, "nt": 33, "b": 159420.32}, {"id": "2026.01.025", "n": "Ömer Gökalp Akcan", "h": 26, "cur": "Ret", "oe": 7, "ot": 33, "ne": 6, "nt": 32, "b": 190653.87}, {"id": "2026.01.005", "n": "İlyas Yılmaz", "h": 26, "cur": "Ret", "oe": 6, "ot": 32, "ne": 6, "nt": 32, "b": 194487.26}, {"id": "2026.01.003", "n": "Kuter Erdil", "h": 23, "cur": "Ret", "oe": 6, "ot": 29, "ne": 6, "nt": 29, "b": 199995.6}, {"id": "2026.01.012", "n": "Fikret Soner", "h": 20, "cur": "Ret", "oe": 4, "ot": 24, "ne": 3, "nt": 23, "b": 129399}], "c": [["Daha önce BAP yürüttü + dış kaynaklı başvuru var (yeni kriterlerde yok)", 3, 0, 0, 0], ["Daha önce BAP yürüttü + proje çıktısı var", 3, 3, 1, 1], ["Daha önce BAP yürüttü + proje çıktısı yok", -1, -1, 1, 1], ["Daha önce BAP yürütmedi", 3, 3, 17, 16], ["Unvan (önceki: Dr. Öğr. Üyesi / Öğr. Gör. / doktora ≤7 yıl; yeni: Dr. Öğr. Üyesi <7 yıl)", 3, 3, 13, 13], ["Araştırma asistanı çalıştırıyor (yeni kriterlerde yok)", 1, 0, 12, 0]], "pool": 2037724.04, "quota": 13};const P=D.p;const fm=n=>n.toLocaleString("tr-TR",{maximumFractionDigits:0});
+let T=28,K="n";const $=i=>document.getElementById(i);
+const res=(x)=>x>=T?"K":"R";const bd=r=>`<span class="bd ${r}">${r=="K"?"Kabul":"Ret"}</span>`;
+const sn=p=>p.id.slice(-3)+" · "+p.n.trim().split(" ").slice(-1)[0];
+function kpis(){const c=P.filter(p=>p.cur=="Kabul").length,o=P.filter(p=>p.ot>=T).length,n=P.filter(p=>p.nt>=T).length;
+const ch=P.filter(p=>res(p.ot)!=res(p.nt)).length;
+$("kp").innerHTML=[["Mevcut sistem",c,"kabul"],["Önceki kriterler",o,"kabul"],["Yeni kriterler",n,"kabul"],["Sonucu değişen",ch,"proje (iki kriter arası)"]].map(a=>`<div class="card"><div class="l">${a[0]}</div><div class="v">${a[1]}</div><div class="l">${a[2]} / ${P.length}</div></div>`).join("")}
+function c1(){const W=Math.max(720,P.length*40+70),H=300,m={l:34,b:62,t:12},ch=H-m.b-m.t,mx=46,y=v=>m.t+ch*(1-v/mx),bw=(W-m.l-10)/P.length;let s=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Projelere göre hakem ve ek puan">`;
+for(let g=0;g<=mx;g+=10)s+=`<line x1="${m.l}" x2="${W-6}" y1="${y(g)}" y2="${y(g)}" stroke="var(--bd)"/><text class="mu" x="${m.l-6}" y="${y(g)+4}" text-anchor="end">${g}</text>`;
+P.forEach((p,i)=>{const e=K=="n"?p.ne:p.oe,x=m.l+i*bw+bw*.15,w=bw*.7;
+s+=`<rect x="${x}" y="${y(p.h)}" width="${w}" height="${y(0)-y(p.h)}" fill="var(--b)" rx="2"/>`;
+if(e>0)s+=`<rect x="${x}" y="${y(p.h+e)}" width="${w}" height="${y(p.h)-y(p.h+e)}" fill="var(--o)" rx="2"/>`;
+if(e<0)s+=`<rect x="${x}" y="${y(p.h)}" width="${w}" height="${y(p.h+e)-y(p.h)}" fill="var(--r)"/>`;
+const tot=p.h+e;s+=`<text x="${x+w/2}" y="${y(Math.max(p.h,tot))-4}" text-anchor="middle" font-weight="600">${tot}</text>`;
+s+=`<text class="mu" transform="translate(${x+w/2},${y(0)+8}) rotate(-50)" text-anchor="end">${sn(p)}</text>`});
+s+=`<line x1="${m.l}" x2="${W-6}" y1="${y(T)}" y2="${y(T)}" stroke="var(--r)" stroke-dasharray="6 4" stroke-width="2"/></svg>`;$("c1").innerHTML=s}
+function c2(){const rh=26,W=760,H=P.length*rh+34,l=130,x=v=>l+(v-18)/(46-18)*(W-l-20);let s=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Önceki ve yeni toplam puan karşılaştırması">`;
+for(let g=20;g<=45;g+=5)s+=`<line x1="${x(g)}" x2="${x(g)}" y1="14" y2="${H-18}" stroke="var(--bd)"/><text class="mu" x="${x(g)}" y="${H-4}" text-anchor="middle">${g}</text>`;
+P.forEach((p,i)=>{const y=22+i*rh;s+=`<text x="${l-8}" y="${y+4}" text-anchor="end">${sn(p)}</text><line x1="${x(p.ot)}" x2="${x(p.nt)}" y1="${y}" y2="${y}" stroke="var(--mu)" stroke-width="2"/>
+<circle cx="${x(p.ot)}" cy="${y}" r="6" fill="var(--card)" stroke="var(--o)" stroke-width="2.5"/><circle cx="${x(p.nt)}" cy="${y}" r="6" fill="var(--b)"/>`});
+s+=`<line x1="${x(T)}" x2="${x(T)}" y1="8" y2="${H-18}" stroke="var(--r)" stroke-dasharray="6 4" stroke-width="2"/></svg>`;$("c2").innerHTML=s}
+function tabs(){const sg=v=>v>0?`+${v}`:v;$("ct").innerHTML="<tr><th>Kriter</th><th>Önceki puan</th><th>Yeni puan</th><th>Önceki proje sayısı</th><th>Yeni proje sayısı</th></tr>"+D.c.map(r=>`<tr><td>${r[0]}</td><td class="n">${sg(r[1])}</td><td class="n ${r[2]==0?"neg":""}">${r[2]==0?"yok":sg(r[2])}</td><td class="n">${r[3]}</td><td class="n">${r[4]}</td></tr>`).join("");
+$("pt").innerHTML="<tr><th>Proje</th><th>Yürütücü</th><th>Hakem</th><th>Mevcut</th><th>Önceki ek / toplam</th><th>Önceki sonuç</th><th>Yeni ek / toplam</th><th>Yeni sonuç</th><th>Bütçe (TL)</th></tr>"+P.map(p=>{const a=res(p.ot),b=res(p.nt);return `<tr class="${a!=b?"ch":""}"><td>${p.id}</td><td>${p.n.trim()}</td><td class="n">${p.h}</td><td class="n">${bd(p.cur=="Kabul"?"K":"R")}</td><td class="n">${sg(p.oe)} / ${p.ot}</td><td class="n">${bd(a)}</td><td class="n">${sg(p.ne)} / ${p.nt}</td><td class="n">${bd(b)}</td><td class="n">${fm(p.b)}</td></tr>`}).join("")}
+function all(){kpis();c1();c2();tabs()}
+$("t").oninput=e=>{T=+e.target.value;$("tv").textContent=T;all()};
+$("seg").onclick=e=>{const k=e.target.dataset.k;if(!k)return;K=k;[...$("seg").children].forEach(b=>b.classList.toggle("on",b.dataset.k==k));c1()};
+all();
+</script></body></html>
